@@ -15,6 +15,11 @@ git clone https://github.com/nikhilgvpce/wikipedia-search.git
 ```
 cd wikipedia-search
 ```
+- Checkout to master branch
+
+```
+git checkout master
+```
 
 - Run the below commands
 
