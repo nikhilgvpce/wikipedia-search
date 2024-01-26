@@ -24,6 +24,7 @@ export const fetchUrl = async (query: String, callBack: Function, setLoading: Fu
         const response = await fetch(URL, {
             headers: {
                 mode: 'no-cors',
+                "Content-Type": "application/json",
                 'Access-Control-Allow-Origin': '*'
             },
             method: 'POST',
