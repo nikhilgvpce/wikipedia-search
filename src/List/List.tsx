@@ -1,23 +1,22 @@
 export const List = ({ results }: { results: any[] }) => {
     if (!results.length) return null;
-    return <> {
-        results.flat().map((res) => {
+    return <>
+        {results.flat().map((res) => {
             if (res) {
                 if (res.includes('https')) {
                     return (
-                        <li>
+                        <li  key={res}>
                             <a href={res}>{res}</a>
                         </li>
                     )
                 } else {
                     return (
-                        <li>
+                        <li key={res}>
                             {res}
                         </li>
                     )
                 }
             }
         })
-    }
-    </>
+        }</>
 }

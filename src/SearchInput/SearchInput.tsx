@@ -6,9 +6,11 @@ import useDebounce from "../Hooks/useDebounce/useDebounce";
 const SearchInput = ({ responseResultsCallBack, setLoading, isLoading }: { responseResultsCallBack: Function, setLoading: Function, isLoading: boolean }) => {
 
     const [query, setQuery] = useState('');
+    const [searchHistory, setSearchHistory] = useState([''])
 
     const fetchResultsDebounce = useDebounce(() => {
-        setLoading(true)
+        setLoading(true);
+        setSearchHistory([...searchHistory, query])
         fetchUrl(query, responseResultsCallBack, setLoading)
       }, 300);
 
