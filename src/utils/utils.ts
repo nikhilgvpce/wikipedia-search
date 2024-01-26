@@ -13,8 +13,8 @@ export const debounce = (fn: Function, delay: number) => {
     }
 }
 
-const cache: {[key: string]: []} = {};
-export const fetchUrl = async (query: String, callBack: Function, setLoading: Function) => {
+
+export const fetchUrl = async (query: string, callBack: Function, setLoading: Function) => {
     if (!query) {
         setLoading(false);
         return;
@@ -23,7 +23,10 @@ export const fetchUrl = async (query: String, callBack: Function, setLoading: Fu
     const URL = 'http://localhost:8080/query/'
     try {
         setTimeout(async () => {
-            if(cache[query]) {
+            let cache = JSON.parse(localStorage.getItem('cache') || '');
+            if (!cache) {
+                localStorage.setItem('cache', JSON.stringify([]));
+            } else if(cache[query]) {
                 setLoading(false);
                 callBack(cache[query]);
                 return;
@@ -35,14 +38,17 @@ export const fetchUrl = async (query: String, callBack: Function, setLoading: Fu
                     'Access-Control-Allow-Origin': '*'
                 },
                 method: 'POST',
-                body: JSON.stringify({query})
+                body: JSON.stringify({ query })
             });
             const data = await response.json();
-            cache[query] = data;
+            cache = {
+                ...cache,
+                query: data
+            };
             callBack(data);
             setLoading(false);
         }, 1500)
-    } catch(err: any) {
+    } catch (err: any) {
         setLoading(false);
         throw Error(err)
     }
