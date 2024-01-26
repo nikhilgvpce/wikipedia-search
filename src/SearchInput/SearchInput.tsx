@@ -22,7 +22,7 @@ const SearchInput = ({ responseResultsCallBack, setLoading, isLoading }: { respo
     }
 
     return (
-        <input disabled={isLoading} className='search-input' type="search" onChange={handleInputChange} value={query} />
+        <input disabled={isLoading} className='search-input' type="search" placeholder="enter your query" onChange={handleInputChange} value={query} />
     )
 }
 

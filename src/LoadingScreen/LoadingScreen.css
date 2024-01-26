@@ -9,6 +9,12 @@
     left: 50%;
     animation: spin 2s linear infinite;
   }
+
+p {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+}
   
   /* Safari */
   @-webkit-keyframes spin {

@@ -1,6 +1,7 @@
 input {
     display: flex;
-    max-width: 25vw;
+    max-width: 40vw;
+    margin-bottom: 10px;
 }
 
 input:disabled {

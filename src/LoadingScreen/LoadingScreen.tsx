@@ -1,6 +1,6 @@
 import "./LoadingScreen.css";
 
-const loadingMessage = 'Please wait...'
+const loadingMessage = 'Fetching results...'
 const LoadingScreen = ({ isLoading }: { isLoading: boolean }) => {
     if (!isLoading) return null;
     return (

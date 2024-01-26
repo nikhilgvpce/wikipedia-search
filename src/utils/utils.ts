@@ -23,9 +23,10 @@ export const fetchUrl = async (query: string, callBack: Function, setLoading: Fu
     const URL = 'http://localhost:8080/query/'
     try {
         setTimeout(async () => {
-            let cache = JSON.parse(localStorage.getItem('cache') || '');
+            let cache:any = JSON.parse(localStorage.getItem('cache') || '');
             if (!cache) {
-                localStorage.setItem('cache', JSON.stringify([]));
+                cache = {};
+                localStorage.setItem('cache', JSON.stringify(cache));
             } else if(cache[query]) {
                 setLoading(false);
                 callBack(cache[query]);
@@ -33,18 +34,14 @@ export const fetchUrl = async (query: string, callBack: Function, setLoading: Fu
             }
             const response = await fetch(URL, {
                 headers: {
-                    mode: 'no-cors',
                     "Content-Type": "application/json",
-                    'Access-Control-Allow-Origin': '*'
                 },
                 method: 'POST',
                 body: JSON.stringify({ query })
             });
             const data = await response.json();
-            cache = {
-                ...cache,
-                query: data
-            };
+            cache[query] = data;
+            localStorage.setItem('cache', JSON.stringify(cache))
             callBack(data);
             setLoading(false);
         }, 1500)
